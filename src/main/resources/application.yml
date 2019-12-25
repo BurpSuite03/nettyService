@@ -1,0 +1,8 @@
+#配置端口
+server:
+  port: 8091
+
+#项目名称  
+spring:
+   application:
+          name: nettyClient 

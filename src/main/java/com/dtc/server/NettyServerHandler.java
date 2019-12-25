@@ -5,11 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.ServerChannel;
 
 /**
  * netty 服务端处理器
  * @author Administrator
- *
+ * 
  */
 public class NettyServerHandler extends ChannelInboundHandlerAdapter{
 	protected final Logger logger = LoggerFactory.getLogger(NettyServerHandler.class);

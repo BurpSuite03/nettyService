@@ -29,7 +29,6 @@ public class NettyServer {
 				.option(ChannelOption.SO_BACKLOG, 1024)
 				//两个小时内没有数据的通信时，TCP会自动发送一个活动的探测报文
 				.childOption(ChannelOption.SO_KEEPALIVE, true);
-		
 		        
 		         try {
 					ChannelFuture future = bootstrap.bind(inetSocketAddress).sync();
@@ -42,8 +41,7 @@ public class NettyServer {
 					bossGroup.shutdownGracefully();
 					//关闭工作线程
 					workGroup.shutdownGracefully();
-				}
-		                
+				}           
 	}
 
 }

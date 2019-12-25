@@ -1,0 +1,8 @@
+#配置端口
+server:
+  port: 8090
+
+#项目名称  
+spring:
+   application:
+          name: nettyServer 

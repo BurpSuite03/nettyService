@@ -1,8 +1,9 @@
 package com.dtc.client;
 
+
+import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -24,7 +25,12 @@ public class NettyClient {
 				ChannelFuture future = bootstrap.connect("127.0.0.1", 8090).sync();
 				logger.info("client 连接成功.....");
 				//发送消息
-				future.channel().writeAndFlush("Hello World......");
+				String str = "str";
+				while(!str.equals("break")) {
+					Scanner input = new Scanner(System.in);
+				    str = input.next();
+					future.channel().writeAndFlush(str);
+				}
 				//等待连接被关闭
 				future.channel().closeFuture().sync();
 			} catch (InterruptedException e) {

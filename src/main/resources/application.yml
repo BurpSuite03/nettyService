@@ -1,6 +1,6 @@
 #配置端口
 server:
-  port: 8090
+  port: 8092
 
 #项目名称  
 spring:

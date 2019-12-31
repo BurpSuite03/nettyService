@@ -17,8 +17,8 @@ public class ClientApplication {
         NettyServer nettyServer = new NettyServer();
         nettyServer.start(new InetSocketAddress("127.0.0.1",8090));
     	
-    	//启动客户端
+    	/*//启动客户端
     	NettyClient nettyClient = new NettyClient();
-    	nettyClient.start();
+    	nettyClient.start();*/
     }
 }

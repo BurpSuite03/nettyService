@@ -1,19 +1,19 @@
-1. JDK �� JRE ��ʲô����
-    1��JDK java Development kit �ļ�ƣ�java�������߰����ṩ��java�Ŀ������������л�����
-    2��JRE java Runtime Environment�ļ�ƣ�java���л�����Ϊjava�������ṩ������Ļ�����
+1. JDK 和 JRE 有什么区别？
+    1：JDK java Development kit 的简称，java开发工具包，提供了java的开发环境和运行环境。
+    2：JRE java Runtime Environment的简称，java运行环境，为java的运行提供了所需的环境。
    
-   ������˵��JDK�ǰ�����JRE�ģ�ͬʱ�������˱���JavaԴ��ı�����javac���������˺ܶ�java����
-   ���Ժͷ����Ĺ��ߡ�����˵���������Ҫ����java����ֻ�谲װJRE�Ϳ����ˣ��������Ҫ
-   ��дjava������Ҫ��װJDK��
+   具体来说，JDK是包含了JRE的，同时还包含了编译Java源码的编译器javac，还包含了很多java程序
+   调试和分析的工具。简单来说：如果你需要运行java程序，只需安装JRE就可以了，如果你需要
+   编写java程序，需要安装JDK。
 
 
-2. == �� equals ��������ʲô��
-    ==�����
-            ���ڻ������ͺ��������ͣ�==������Ч���ǲ�ͬ�ģ�
-                1���������ͣ��Ƚϵ���ֵ�Ƿ���ͬ��
-                2���������ͣ��Ƚϵ��������Ƿ���ͬ��
+2. == 和 equals 的区别是什么？
+    ==解读：
+            对于基本类型和引用类型，==的作用效果是不同的：
+                1：基本类型：比较的是值是否相同；
+                2：引用类型：比较的是引用是否相同；
         
-        ����ʾ����
+        代码示例：
         String x = "string";
         String y = "string";
         String z = new String("string");
@@ -22,28 +22,111 @@
         System.out.println(x == z);  //false	
         System.out.println(x.equals(y));  //true
         System.out.println(x.equals(z));  //true
-        ����������Ϊx��yָ�����ͬһ���������� x==y Ϊtrue��new String() ���ǿ����ڴ�ռ�
-                        ���� x==zΪfalse����equalsһֱ�ȽϵĶ���ֵ�����Զ�Ϊtrue��
+        代码解读：因为x和y指向的是同一个引用所以 x==y 为true，new String() 这是开辟内存空间
+                        所以 x==z为false，而equals一直比较的都是值，所以都为true。
 
-     equals�����
-           equals�������� == ��ֻ��String��Integer ����д��equals�����������ñȽϸ�Ϊ��ֵ�Ƚϡ�
+     equals解读：
+           equals本质上是 == ，只是String、Integer 等重写了equals方法，把引用比较改为了值比较。
 
-    �ܽ᣺==�������������˵��ֵ�Ƚϣ���������������˵�Ƚϵ������ã���equalsĬ���������
-              ���ñȽϣ�ֻ�Ǻܶ�����д��equals����������String��Integer �ȣ����������ֵ�Ƚϣ�
-              ����һ������� equals �Ƚϵ���ֵ�Ƿ���ȡ�
+    总结：==对与基本类型来说是值比较，对于引用类型来说比较的是引用；而equals默认情况下是
+              引用比较，只是很多类重写了equals方法，比如String、Integer 等，把它变成了值比较，
+              所以一般情况下 equals 比较的是值是否相等。
 
-3. ��������� hashCode()��ͬ���� equals()Ҳһ��Ϊ true������
-4. final �� java ����ʲô���ã�
-5. java �е� Math.round(-1.5) ���ڶ��٣�
-6. String ���ڻ���������������
-7. java �в����ַ���������Щ�ࣿ����֮����ʲô����
-8. String str="i"�� String str=new String("i")һ����
-9. ��ν��ַ�����ת��
-10. String ��ĳ��÷���������Щ��
-11. ���������Ҫ�г��󷽷���
-12. ��ͨ��ͳ���������Щ����
-13. ��������ʹ�� final ������
-14. �ӿںͳ�������ʲô����
-15. java �� IO ����Ϊ���֣�
-16. BIO��NIO��AIO ��ʲô����
-17. Files�ĳ��÷���������Щ��
+3. 两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？
+        不正确，两个对象的hashCode()相同，equals也不一定为true。
+   
+       代码实例：
+        String x = "通话";
+		String y = "重地";
+		String z = new String("string");
+		
+		System.out.println("x: "+x.hashCode());
+		System.out.println("y: "+y.hashCode());
+		System.out.println(x.equals(y));
+		
+		执行结果：
+		   x: 1179395
+           y: 1179395
+              false
+  
+         从以上结果中得出，x和y两个对象的hashCode()是相同的，而equals()的结果却是false，因为在散列表中
+         两个相同的键值对的hashCode()相同，而相同hashCode()的两个键值对却不一定相同。
+  
+4. final 在 java 中有什么作用？
+   1：final 修饰的类为最终类，不能被继承
+   2：final 修饰的方法不能被重写
+   3：final 修饰的变量叫常量，常量必须初始化，初始化之后值就不能被修改
+   
+5. java 中的 Math.round(-1.5) 等于多少？
+         等于 -1，在数轴上取值时，中间值(0.5)向右取整。
+         
+6. String 属于基础的数据类型吗？
+   String不属于基础类型，基础类型有8种：byte、boolean、char、short、int、float、long、double。
+   
+7. java 中操作字符串都有哪些类？它们之间有什么区别？
+         操作字符串的类有：String、StringBuffer、StringBuilder
+   
+   String和StringBuffer、StringBuilder的区别在于String声明的是不可变的对象，每次操作都会生成新的String对象，
+         然后将指针指向新的String对象，而StringBuffer、StringBuilder可以在原来的对象上进行操作，所以经常改变字符串内容的
+        最好不要使用String
+        
+   StringBuffer和StringBuilder最大的区别在于StringBuffer是线程安全的，而StringBuilder是非线程安全的，但
+   StringBuilder的性能高于StringBuffer，所以在单线程的环境下推荐使用StringBuilder，在多线程的环境下推荐使用
+   StringBuffer
+   
+8. String str="i"与 String str=new String("i")一样吗？
+         不一样，因为内存的分配方式不一样String str="i"的方式，jvm会将其分配到常量池中，而String str = new String("i")的方式
+   jvm会将其分配到堆内存中
+         
+9. 如何将字符串反转？
+         使用StringBuffer、StringBuilder的reverse()方法。
+   
+10. String 类的常用方法都有那些？
+    
+    str.indexOf()：返回指定字符串索引。
+	str.charAt()：返回指定索引处的字符。
+	str.replace()：字符串替换。
+	str.trim()：去除字符串两端空白。
+	str.split()：分割字符串，返回分割后的字符串数组。
+	str.getBytes()：返回字符串的byte类型数组。
+	str.length()：返回字符串长度。
+	str.toLowerCase()：将字符串转成小写字母。
+	str.toUpperCase()：将字符串转成大写字母。
+	str.equals()：字符串比较。
+    
+    
+11. 抽象类必须要有抽象方法吗？
+    1:不必要,有抽象方法的类一定是抽象类,抽象类不一定有抽象方法。
+    
+12. 普通类和抽象类有哪些区别？
+    1:抽象类可以包含抽象方法,普通类不能包含抽象方法。
+    2:抽象类不可以直接实例化,普通类可以直接实例化。
+
+13. 抽象类能使用 final 修饰吗？
+    1:不能,定义抽象类就是让其他类继承的,定义为final该类就不能被继承,这样彼此就会产生矛盾，
+                  所以抽象类不能被定义为final。
+
+14. 接口和抽象类有什么区别？
+           1：实现：抽象类的子类使用extents来继承；接口必须用implements来实现接口
+           2：构造函数：抽象类可以有构造函数，接口不能有
+           3：main方法：抽象类可以有main方法，并且可以运行他，接口不能有main方法
+           4：实现数量：类可以是实现多个接口，但只能继承一个抽象类
+           5：访问修饰符：接口的默认使用public修饰，抽象类中的方法可以是任意的访问修饰符
+
+15. java 中 IO 流分为几种？
+           1：按功能分：输入流（input）、输出流（output）
+           2：按类型分：字节流和字符流
+           3：字节流和字符流的区别：字节流按八位传输以字节为单位输入输出数据，字符流按十六位传输以字符位单位输入输出数据
+
+16. BIO、NIO、AIO 有什么区别？
+
+17. Files的常用方法都有哪些？
+    1:Files.createNewFile():新建文件
+    2:Files.exits():查看文件是否存在
+    3:Files.createDirectory():创建文件夹
+    4:Files.delete()：删除一个文件或目录
+    5:Files.copy()：复制文件
+    6:Files.move()：移动文件
+    7:Files.size()：查看文件大小（字节）
+    8:Files.read()：读取文件
+    9:Files.write()：写入文件

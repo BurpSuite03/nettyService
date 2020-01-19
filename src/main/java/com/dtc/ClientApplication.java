@@ -5,7 +5,6 @@ import java.net.InetSocketAddress;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.dtc.client.NettyClient;
 import com.dtc.server.NettyServer;
 
 @SpringBootApplication
